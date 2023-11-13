@@ -9,18 +9,13 @@
 Raspberry与STM32之间的通信协议如下：
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/other/protocol.png)
 
-## Architecture
-### STM32
-
-### Raspberry Pi
-
 
 ## Web server with Flask 
 ### web index 
-当你在浏览器中输入http://172.20.10.13:5000/时，你会看到如下的界面：
+当你在浏览器中输入http://172.20.10.13:5000/时，flask会返回index.html的内容，如下图所示:
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/index.png)
 ### show data 
-等你点击show data按钮连接后，你会看到下图中的界面，这个界面会实时的显示温度和压力的数据，这个网页会每隔一秒自动向stm32发送"GET_T"和"GET_P"的请求，
+当你点击show data按钮连接后，你会看到下图中的界面，这个界面会实时的显示温度和压力的数据，这个网页会每隔一秒自动向stm32发送"GET_T"和"GET_P"的请求，
 然后获取最新的温度和压力数据，然后显示在网页上。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/showGraph.png)
 ## REST API TEST 
