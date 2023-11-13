@@ -109,7 +109,7 @@ Lorsque le STM32 reçoit une requête SET_K envoyée par le Raspberry Pi, il dé
 
 ### GET_K
 
-Lorsque le STM32 reçoit une requête GET_K envoyée par le Raspberry Pi, il récupère les dernières données angulaires et les envoie au Raspberry Pi. La requête GET_K est illustrée ci-dessous :
+Lorsque le STM32 reçoit une requête GET_K envoyée par le Raspberry Pi, il récupère le dernier coefficient K  et l'envoie au Raspberry Pi. La requête GET_K est illustrée ci-dessous :
 
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/GET_K.jpg)
 
