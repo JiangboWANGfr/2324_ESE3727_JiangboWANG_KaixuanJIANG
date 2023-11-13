@@ -60,7 +60,7 @@ En saisissant http://172.20.10.13:5000/pres/ \<index> dans RESTED, en choisissan
 
 ### Réglage de l'coefficient K
 
-En saisissant http://172.20.10.13:5000/scale/&lt;new_scale&gt; dans RESTED, en choisissant POST, puis en cliquant sur send, Flask envoie une requête "SET_K" au STM32 pour définir la nouvelle donnée de coefficient K et la renvoie au format JSON, comme illustré ci-dessous. Ces données sont également stockées dans une liste Python.
+En saisissant http://172.20.10.13:5000/scale/ &lt;new_scale&gt; dans RESTED, en choisissant POST, puis en cliquant sur send, Flask envoie une requête "SET_K" au STM32 pour définir la nouvelle donnée de coefficient K et la renvoie au format JSON, comme illustré ci-dessous. Ces données sont également stockées dans une liste Python.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/setScale.png)
 
 ### Récupération de l'coefficient K
