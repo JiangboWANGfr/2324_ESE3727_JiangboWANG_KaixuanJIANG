@@ -1,67 +1,97 @@
 # TP Bus et Réseaux de Jiangbo WANG et KaiXUAN JIANG
 
 ## Introduction
-在这个TP中，我们将使用STM32和Raspberry Pi来实现一个温度和压力的监测系统。STM32将会采集温度和压力的数据，然后通过UART协议将数据发送给Raspberry Pi。Raspberry Pi将会通过Flask框架来实现一个web服务器，最后，我们将会通过web服务器来实现对数据的可视化。
-同时，使用REST API来实现对温度和压力数据的增删改查
-最后，为了学习使用CAN总线，我们会从Raspberry Pi中的web服务器发送一个scale的数据给STM32，STM32会将这个数据和温度数据转换成角度数据，然后通过CAN总线发送给步进电机，步进电机会根据这个角度来转动，从而实现使用温度数据来控制步进电机的转动。下面是系统的架构图：
+
+Dans ce TP, nous utiliserons un STM32 et un Raspberry Pi pour mettre en place un système de surveillance de la température et de la pression. Le STM32 recueillera les données de température et de pression, puis les enverra au Raspberry Pi via le protocole UART. Le Raspberry Pi utilisera le framework Flask pour mettre en place un serveur web, et finalement, nous utiliserons ce serveur pour visualiser les données.
+En même temps, nous utiliserons l'API REST pour effectuer des opérations CRUD (création, lecture, mise à jour, suppression) sur les données de température et de pression.
+Enfin, pour apprendre à utiliser le bus CAN, nous enverrons des données d'échelle du serveur web du Raspberry Pi au STM32. Le STM32 convertira ces données en données angulaires, qu'il enverra ensuite à un moteur pas à pas via le bus CAN. Le moteur pas à pas tournera selon cet angle, permettant ainsi de contrôler le mouvement du moteur pas à pas avec les données de température. Voici le schéma du système :
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/other/TPobjuctive.png)
+
 ## Communication Protocol
-Raspberry与STM32之间的通信协议如下：
+
+Le protocole de communication entre le Raspberry et le STM32 est comme suit :
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/other/protocol.png)
 
+## Serveur Web avec Flask
 
-## Web server with Flask 
-### web index 
-当你在浏览器中输入http://172.20.10.13:5000/时，flask会返回index.html的内容，如下图所示:
+### Page d'accueil
+
+Lorsque vous saisissez http://172.20.10.13:5000/ dans votre navigateur, Flask renvoie le contenu de index.html, comme illustré ci-dessous :
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/index.png)
-### show data 
-当你点击show data按钮连接后，你会看到下图中的界面，这个界面会实时的显示温度和压力的数据，这个网页会每隔一秒自动向stm32发送"GET_T"和"GET_P"的请求，
-然后获取最新的温度和压力数据，然后显示在网页上。
+
+### Affichage des données
+
+En cliquant sur le bouton "show data", vous verrez l'interface illustrée ci-dessous. Cette interface affichera en temps réel les données de température et de pression. La page web enverra automatiquement toutes les secondes des requêtes "GET_T" et "GET_P" au STM32 pour récupérer les dernières données de température et de pression, qui seront ensuite affichées sur la page web.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/showGraph.png)
-## REST API TEST 
-我们使用CHROME的插件RESTED来测试REST API.
-### 获取最新的温度数据
-当在RESTED中输入http://172.20.10.13:5000/temp/，然后选择POST，然后点击send,flask会向stm32发送"GET_T"的请求，然后获取最新的温度数据，并返回json格式的数据。如下图所示，并且会将这个数据存储在一个python列表中。
+
+## Test de l'API REST
+
+Nous utilisons le plugin CHROME RESTED pour tester l'API REST.
+
+### Récupération des dernières données de température
+
+En saisissant http://172.20.10.13:5000/temp/ dans RESTED, en choisissant POST, puis en cliquant sur send, Flask envoie une requête "GET_T" au STM32, récupère les dernières données de température et renvoie les données au format JSON, comme illustré ci-dessous. Ces données sont également stockées dans une liste Python.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getNewTemp.png)
 
-### 获取所有的温度数据
-当在RESTED中输入http://172.20.10.13:5000/temp/，然后选择GET，然后点击send,flask会返回存储在python列表中的所有的温度数据，并返回json格式的数据。如下图所示。
+### Récupération de toutes les données de température
+
+En saisissant http://172.20.10.13:5000/temp/ dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie toutes les données de température stockées dans la liste Python au format JSON, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getAllTemp.png)
-### get temp index x 
-当在RESTED中输入http://172.20.10.13:5000/temp/<index>,然后选择GET，然后点击send,flask会返回存储在python列表中的第index个温度数据，并返回json格式的数据。如下图所示。
+
+### Récupération de la température à l'indice x
+
+En saisissant http://172.20.10.13:5000/temp/<index> dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie la donnée de température à l'indice spécifié stockée dans la liste Python au format JSON, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getTempIndex.png)
-### get pressure with post
-当在RESTED中输入http://172.20.10.13:5000/pres/，然后选择POST，然后点击send,flask会向stm32发送"GET_P"的请求，然后获取最新的压力数据，并返回json格式的数据。如下图所示，并且会将这个数据存储在一个python列表中。
+
+### Récupération des dernières données de pression
+
+En saisissant http://172.20.10.13:5000/pres/ dans RESTED, en choisissant POST, puis en cliquant sur send, Flask envoie une requête "GET_P" au STM32, récupère les dernières données de pression et renvoie les données au format JSON, comme illustré ci-dessous. Ces données sont également stockées dans une liste Python.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getNewPres.png)
-### get pressure with get
-当在RESTED中输入http://172.20.10.13:5000/pres/，然后选择GET，然后点击send,flask会返回存储在python列表中的所有的压力数据，并返回json格式的数据。如下图所示。
+
+### Récupération de toutes les données de pression
+
+En saisissant http://172.20.10.13:5000/pres/ dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie toutes les données de pression stockées dans la liste Python au format JSON, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getAllPres.png)
-### get pressure with get x
-当在RESTED中输入http://172.20.10.13:5000/pres/<index>,然后选择GET，然后点击send,flask会返回存储在python列表中的第index个压力数据，并返回json格式的数据。如下图所示。
+
+### Récupération de la pression à l'indice x
+
+En saisissant http://172.20.10.13:5000/pres/<index> dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie la donnée de pression à l'indice spécifié stockée dans la liste Python au format JSON, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getPresIndex.png)
-### set scale
-当在RESTED中输入http://172.20.10.13:5000/scale/，然后选择POST，然后点击send,flask会向stm32发送"SET_T"的请求，设置最新的scale数据，并返回json格式的数据。如下图所示，并且会将这个数据存储在一个python列表中。
+
+### Réglage de l'échelle
+
+En saisissant http://172.20.10.13:5000/scale/ dans RESTED, en choisissant POST, puis en cliquant sur send, Flask envoie une requête "SET_T" au STM32 pour définir les nouvelles données d'échelle et renvoie les données au format JSON, comme illustré ci-dessous. Ces données sont également stockées dans une liste Python.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/setScale.png)
-### get scale
-当在RESTED中输入http://172.20.10.13:5000/scale/，然后选择GET，然后点击send,flask会返回存储的最新的scale数据，并返回json格式的数据。如下图所示。
+
+### Récupération de l'échelle
+
+En saisissant http://172.20.10.13:5000/scale/ dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie les données d'échelle stockées les plus récentes au format JSON, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getScale.png)
-### get angle 
-当在RESTED中输入http://172.20.10.13:5000/angle/，然后选择GET，然后点击send,flask会向stm32发送"GET_A"的请求，然后获取最新的角度数据，并返回json格式的数据。如下图所示。
+
+### Récupération de l'angle
+
+En saisissant http://172.20.10.13:5000/angle/ dans RESTED, en choisissant GET, puis en cliquant sur send, Flask envoie une requête "GET_A" au STM32, récupère les dernières données d'angle et renvoie les données au format JSON, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getAngle.png)
-### delete  temp inex 
-当在RESTED中输入http://172.20.10.13:5000/temp/<index>，然后选择DELETE，然后点击send,flask会删除存储在python列表中的第index个温度数据，并返回删除的index。如下图所示。
+
+### Suppression de la température à l'indice
+
+En saisissant http://172.20.10.13:5000/temp/<index> dans RESTED, en choisissant DELETE, puis en cliquant sur send, Flask supprime la donnée de température à l'indice spécifié dans la liste Python et renvoie l'indice supprimé, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/deleteTempIndex.png)
-### delete  pres index 
-当在RESTED中输入http://172.20.10.13:5000/pres/<index>，然后选择DELETE，然后点击send,flask会删除存储在python列表中的第index个压力数据，并返回删除的index。如下图所示。
+
+### Suppression de la pression à l'indice
+
+En saisissant http://172.20.10.13:5000/pres/<index> dans RESTED, en choisissant DELETE, puis en cliquant sur send, Flask supprime la donnée de pression à l'indice spécifié dans la liste Python et renvoie l'indice supprimé, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/deletePresIndex.png)
 
-## Result de Protocol 
+## Result de Protocol
 
 ## Conclusion
-在这个TP中，我们学习了如何使用STM32和Raspberry Pi来实现一个温度和压力的监测系统。
-具体来说：
-* 1. 学习了I2C协议，使用I2C协议来实现STM32和温度传感器(bmp280)的通信，并学习怎么编写一个I2C的传感器驱动程序
-* 2. 学习了UART协议，使用UART协议来实现STM32和Raspberry Pi的通信
-* 3. 学习了CAN协议，使用CAN协议来实现STM32和步进电机的通信
-* 4. 学习了Flask框架，使用Flask框架来实现一个web服务器
-* 5. 学习了REST API，使用REST API来实现对温度和压力数据的增删改查
+
+Dans ce TP, nous avons appris à utiliser un STM32 et un Raspberry Pi pour mettre en place un système de surveillance de la température et de la pression.
+Plus précisément :
+
+- Nous avons appris le protocole I2C, utilisé pour la communication entre le STM32 et le capteur de \* \* \* \* température (bmp280), et comment écrire un pilote de capteur pour I2C.
+- Nous avons appris le protocole UART, utilisé pour la communication entre le STM32 et le Raspberry Pi.
+- Nous avons appris le protocole CAN, utilisé pour la communication entre le STM32 et le moteur pas à pas.
+- Nous avons appris le framework Flask, utilisé pour mettre en place un serveur web.
+- Nous avons appris l'API REST, utilisée pour réaliser des opérations CRUD sur les données de température et de pression.
