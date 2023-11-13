@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Sensor Data</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    
+// set time interval to fetch data every 2 seconds
+setInterval(function() {
+    fetch('/temperature').then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        var tempElement = document.getElementById('temperature');  
+        tempElement.innerHTML = 'temperature: ' + data.temperature + '  °C';
+        // add new temperature data to the scroll list
+        var tempScrollList = document.getElementById('temp-scroll-list');
+        var newTempItem = document.createElement('li');
+        newTempItem.textContent = 'temperature: ' + data.temperature + '  °C';
+        tempScrollList.appendChild(newTempItem);
+    });
+    fetch('/pressure').then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        var presElement = document.getElementById('pressure');
+        presElement.innerHTML = 'pressure: ' + data.pressure + '  Pa';
+        // add new pressure data to the scroll list
+        var presScrollList = document.getElementById('pres-scroll-list');
+        var newPresItem = document.createElement('li');
+        newPresItem.textContent = 'pressure: ' + data.pressure + '  Pa';
+        presScrollList.appendChild(newPresItem);
+    });
+}, 1000);
+
+</script>
+</head>
+<body>
+
+<div  id="real-time-data" style="float:left; width:25%;margin-left:10%;">
+    <h2>Real-time data</h2>
+    <div id="temperature">Temperature : Loading...</div>
+       <div id="pressure">Pressure    : Loading...</div>
+    <h3>Temperature Data</h3>
+    <ul id="temp-scroll-list" style="height: 400px;; overflow:auto;"></ul>
+    <h3>Pressure Data</h3>  
+    <ul id="pres-scroll-list" style="height: 400px;; overflow:auto;"></ul>
+</div>
+<div id="data-charts" style="float:right; width:50%;margin-right:5%;">
+    <h2>Data change chart</h2>
+    <canvas id="temperatureChart"></canvas>
+    <canvas id="pressureChart"></canvas>
+</div> 
+<script>
+// 更新数据流
+function updateDataStream(temperature, pressure) {
+  const paragraph = document.createElement('p');
+  paragraph.textContent = `温度: ${temperature}℃ 压力: ${pressure}Pa`;
+  const dataStreamElement = document.getElementById('data-stream');
+  dataStreamElement.appendChild(paragraph);
+  dataStreamElement.scrollTop = dataStreamElement.scrollHeight;
+}
+
+// 获取温度和压力数据
+function fetchData() {
+  // 获取温度数据
+  fetch('/temperature').then(response => response.json()).then(data => {
+    const temperature = data.temperature;
+    // 获取压力数据
+    fetch('/pressure').then(response => response.json()).then(data => {
+      const pressure = data.pressure;
+      // 更新数据流和图表
+      updateDataStream(temperature, pressure);
+      updateDataChart(dataChart, temperature, pressure);
+    });
+  }).catch(error => console.error('Error:', error));
+  
+  // 设置定时器，每秒更新一次
+  setTimeout(fetchData, 1000);
+}
+</script>
+ <script>
+        const tempData = {
+            labels: [],
+            datasets: [{
+                label: 'Temperature (°C)',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [],
+            }]
+        };
+
+        const presData = {
+            labels: [],
+            datasets: [{
+                label: 'Pressure (atm)',
+                backgroundColor: 'rgb(54, 162, 235)',
+                borderColor: 'rgb(54, 162, 235)',
+                data: [],
+            }]
+        };
+
+        const tempConfig = {
+            type: 'line',
+            data: tempData,
+            options: {}
+        };
+
+        const presConfig = {
+            type: 'line',
+            data: presData,
+            options: {}
+        };
+
+        const tempChart = new Chart(
+            document.getElementById('temperatureChart'),
+            tempConfig
+        );
+
+        const presChart = new Chart(
+            document.getElementById('pressureChart'),
+            presConfig
+        );
+
+        function fetchData() {
+            fetch('/temperature')
+                .then(response => response.json())
+                .then(data => {
+                    const now = new Date();
+                    tempData.labels.push(now.toLocaleTimeString());
+                    tempData.datasets[0].data.push(data.temperature);
+                    tempChart.update();
+
+                    const dataDisplay = document.getElementById('data-display');
+                    dataDisplay.innerHTML += '<div class="data-point">Temperature: ' + data.temperature.toFixed(2) + '°C at ' + now.toLocaleTimeString() + '</div>';
+                    dataDisplay.scrollTop = dataDisplay.scrollHeight;
+                });
+
+            fetch('/pressure')
+                .then(response => response.json())
+                .then(data => {
+                    const now = new Date();
+                    presData.labels.push(now.toLocaleTimeString());
+                    presData.datasets[0].data.push(data.pressure);
+                    presChart.update();
+
+                    const dataDisplay = document.getElementById('data-display');
+                    dataDisplay.innerHTML += '<div class="data-point">Pressure: ' + data.pressure.toFixed(2) + 'atm at ' + now.toLocaleTimeString() + '</div>';
+                    dataDisplay.scrollTop = dataDisplay.scrollHeight;
+                });
+        }
+
+        // Fetch data every 5 seconds
+        setInterval(fetchData, 1000);
+    </script>
+
+</body>
+</html>
