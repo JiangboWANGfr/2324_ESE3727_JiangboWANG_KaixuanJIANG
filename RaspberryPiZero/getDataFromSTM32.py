@@ -1,7 +1,7 @@
 """
     File name: getDataFromSTM32.py
     Created on: 7 June 2019
-    Last Modified: 9 November 2023
+    Last Modified: 13 November 2023
     Author: Jiangbo WANG
 
     Description:

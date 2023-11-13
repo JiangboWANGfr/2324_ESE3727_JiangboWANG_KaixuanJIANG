@@ -1,3 +1,13 @@
+"""
+    File name: main.py
+    Created on: 7 June 2019
+    Last Modified: 13 November 2023
+    Author: Jiangbo WANG
+
+    Description:
+        This module is used to create a web server using Flask.
+"""
+
 from flask import Flask, jsonify, request, abort, render_template
 import serial
 import json
@@ -7,13 +17,12 @@ from getDataFromSTM32 import get_temperature, get_pressure,get_angle,set_scale
 
 app = Flask(__name__)
 
-# 假设的数据存储结构
+# set the global variables
 temperatures = []
 pressures = []
 scale_global = 0
 '''
-the route /temperature/ is used to get the temperature from the STM32 for show a graph in the web 
-the route /pressure1/ is used to get the pressure from the STM32 for show a graph in the web
+the route /getdataforgraph is used to get the temperature and pressure to set the graph
 '''
 @app.route('/getdataforgraph', methods=['GET'])
 def create_temperature():
@@ -76,6 +85,10 @@ def create_pres():
         pressure = 0
         pressures.append(pressure)
         abort(400)
+
+'''
+The route /pres/ is used to get all the pressure using GET method
+'''
 @app.route('/pres/', methods=['GET'])
 def get_all_press():
     return jsonify({'pressures': pressures})
@@ -86,6 +99,7 @@ def get_press(index):
         return jsonify({'pressure': pressures[index]})
     except IndexError:
         abort(404)
+        
 '''
 The route /scale/ is used to update the scale using POST method
 '''
@@ -98,11 +112,17 @@ def update_scale(new_scale):
         return jsonify({'scale': new_scale}), 200
     else:
         abort(400)
-
+'''
+The route /scale/ is used to get the scale using GET method
+'''
 @app.route('/scale/', methods=['GET'])
 def get_scale():
     return jsonify({'scale': scale_global})
 
+
+'''
+The route /angle/ is used to get the angle using GET method
+'''
 @app.route('/angle/', methods=['GET'])
 def get_angleweb():
     angle = get_angle()
@@ -112,6 +132,9 @@ def get_angleweb():
     else:
         abort(404)
 
+'''
+the route /temp/<int:index> is used to delete the temperature index using DELETE method
+'''
 @app.route('/temp/<int:index>', methods=['DELETE'])
 def delete_temp(index):
     try:
@@ -120,6 +143,9 @@ def delete_temp(index):
     except IndexError:
         abort(404)
 
+'''
+the route /pres/<int:index> is used to delete the pressure index using DELETE method
+'''
 @app.route('/pres/<int:index>', methods=['DELETE'])
 def delete_pres(index):
     try:
@@ -129,16 +155,23 @@ def delete_pres(index):
         abort(404)
 
 
-
+'''
+The route /showdata/ is used to show the data graph in the web
+'''
 @app.route('/showdata/')
 def data():
     return render_template('showdata.html')
 
+'''
+This is the index page
+'''
 @app.route('/')
 def index():
     return render_template("index.html")
 
-# return 404 page if not found
+'''
+This is the 404 page
+'''
 @app.errorhandler(404)
 def page_not_found(error):
     # 返回自定义的 404 错误页面
