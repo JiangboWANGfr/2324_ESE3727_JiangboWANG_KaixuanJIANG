@@ -103,18 +103,18 @@ Lorsque le STM32 reçoit une requête GET_P envoyée par le Raspberry Pi, il env
 
 Lorsque le STM32 reçoit une requête SET_K envoyée par le Raspberry Pi, il définit un nouveau coefficient de proportionnalité. Il multiplie ensuite ce coefficient par la différence des dernières variations de température pour obtenir une valeur angulaire, qu'il envoie ensuite au moteur pas à pas. La requête SET_K est illustrée ci-dessous :
 
-![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/SET_K.png)
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/SET_K.jpg)
 
 ### GET_K
 
 Lorsque le STM32 reçoit une requête GET_K envoyée par le Raspberry Pi, il récupère les dernières données angulaires et les envoie au Raspberry Pi. La requête GET_K est illustrée ci-dessous :
 
-![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/GET_K.png)
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/GET_K.jpg)
 
 ### GET_A
 
 Lorsque le STM32 reçoit une requête GET_A envoyée par le Raspberry Pi, il récupère les dernières données angulaires stockées et les envoie au Raspberry Pi, comme illustré ci-dessous :
-![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/GET_A.jpg)
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/GET_A.png)
 
 ## Conclusion
 
