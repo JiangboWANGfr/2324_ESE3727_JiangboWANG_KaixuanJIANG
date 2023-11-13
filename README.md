@@ -33,23 +33,31 @@ Raspberry与STM32之间的通信协议如下：
 当在RESTED中输入http://172.20.10.13:5000/temp/，然后选择GET，然后点击send,flask会返回存储在python列表中的所有的温度数据，并返回json格式的数据。如下图所示。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getAllTemp.png)
 ### get temp index x 
-当在RESTED中输入http://172.20.10.13:5000/temp/<index>
+当在RESTED中输入http://172.20.10.13:5000/temp/<index>,然后选择GET，然后点击send,flask会返回存储在python列表中的第index个温度数据，并返回json格式的数据。如下图所示。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getTempIndex.png)
 ### get pressure with post
+当在RESTED中输入http://172.20.10.13:5000/pres/，然后选择POST，然后点击send,flask会向stm32发送"GET_P"的请求，然后获取最新的压力数据，并返回json格式的数据。如下图所示，并且会将这个数据存储在一个python列表中。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getNewPres.png)
 ### get pressure with get
+当在RESTED中输入http://172.20.10.13:5000/pres/，然后选择GET，然后点击send,flask会返回存储在python列表中的所有的压力数据，并返回json格式的数据。如下图所示。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getAllPres.png)
 ### get pressure with get x
+当在RESTED中输入http://172.20.10.13:5000/pres/<index>,然后选择GET，然后点击send,flask会返回存储在python列表中的第index个压力数据，并返回json格式的数据。如下图所示。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getPresIndex.png)
 ### set scale
+当在RESTED中输入http://172.20.10.13:5000/scale/，然后选择POST，然后点击send,flask会向stm32发送"SET_T"的请求，设置最新的scale数据，并返回json格式的数据。如下图所示，并且会将这个数据存储在一个python列表中。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/setScale.png)
 ### get scale
+当在RESTED中输入http://172.20.10.13:5000/scale/，然后选择GET，然后点击send,flask会返回存储的最新的scale数据，并返回json格式的数据。如下图所示。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getScale.png)
 ### get angle 
+当在RESTED中输入http://172.20.10.13:5000/angle/，然后选择GET，然后点击send,flask会向stm32发送"GET_A"的请求，然后获取最新的角度数据，并返回json格式的数据。如下图所示。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getAngle.png)
 ### delete  temp inex 
+当在RESTED中输入http://172.20.10.13:5000/temp/<index>，然后选择DELETE，然后点击send,flask会删除存储在python列表中的第index个温度数据，并返回删除的index。如下图所示。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/deleteTempIndex.png)
 ### delete  pres index 
+当在RESTED中输入http://172.20.10.13:5000/pres/<index>，然后选择DELETE，然后点击send,flask会删除存储在python列表中的第index个压力数据，并返回删除的index。如下图所示。
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/deletePresIndex.png)
 
 ## Result de Protocol 
