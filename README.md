@@ -85,6 +85,10 @@ En saisissant http://172.20.10.13:5000/pres/<index> dans RESTED, en choisissant 
 
 ## Result de Protocol
 
+### GET_T
+
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/SET_K.jpg)
+
 ## Conclusion
 
 Dans ce TP, nous avons appris à utiliser un STM32 et un Raspberry Pi pour mettre en place un système de surveillance de la température et de la pression.
