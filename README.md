@@ -58,4 +58,10 @@ Raspberry与STM32之间的通信协议如下：
 ## Result de Protocol 
 
 ## Conclusion
-
+在这个TP中，我们学习了如何使用STM32和Raspberry Pi来实现一个温度和压力的监测系统。
+具体来说：
+* 1. 学习了I2C协议，使用I2C协议来实现STM32和温度传感器(bmp280)的通信，并学习怎么编写一个I2C的传感器驱动程序
+* 2. 学习了UART协议，使用UART协议来实现STM32和Raspberry Pi的通信
+* 3. 学习了CAN协议，使用CAN协议来实现STM32和步进电机的通信
+* 4. 学习了Flask框架，使用Flask框架来实现一个web服务器
+* 5. 学习了REST API，使用REST API来实现对温度和压力数据的增删改查
