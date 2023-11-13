@@ -83,11 +83,38 @@ En saisissant http://172.20.10.13:5000/temp/<index> dans RESTED, en choisissant 
 En saisissant http://172.20.10.13:5000/pres/<index> dans RESTED, en choisissant DELETE, puis en cliquant sur send, Flask supprime la donnée de pression à l'indice spécifié dans la liste Python et renvoie l'indice supprimé, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/deletePresIndex.png)
 
-## Result de Protocol
+## STM32 : Résultat du Protocole
+
+### Récupération de la donnée de capteur de bmp280
 
 ### GET_T
 
-![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/SET_K.jpg)
+Lorsque le STM32 reçoit une requête GET_T envoyée par le Raspberry Pi, il envoie une demande au bmp280 pour obtenir les dernières données de température, puis envoie ces données au Raspberry Pi, comme illustré ci-dessous :
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/GET_T.png)
+
+### GET_P
+
+Lorsque le STM32 reçoit une requête GET_P envoyée par le Raspberry Pi, il envoie une demande au bmp280 pour obtenir les dernières données de pression, puis envoie ces données au Raspberry Pi, comme illustré ci-dessous :
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/GET_P.png)
+
+### Commande du moteur pas à pas
+
+### SET_K
+
+Lorsque le STM32 reçoit une requête SET_K envoyée par le Raspberry Pi, il définit un nouveau coefficient de proportionnalité. Il multiplie ensuite ce coefficient par la différence des dernières variations de température pour obtenir une valeur angulaire, qu'il envoie ensuite au moteur pas à pas. La requête SET_K est illustrée ci-dessous :
+
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/SET_K.png)
+
+### GET_K
+
+Lorsque le STM32 reçoit une requête GET_K envoyée par le Raspberry Pi, il récupère les dernières données angulaires et les envoie au Raspberry Pi. La requête GET_K est illustrée ci-dessous :
+
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/GET_K.png)
+
+### GET_A
+
+Lorsque le STM32 reçoit une requête GET_A envoyée par le Raspberry Pi, il récupère les dernières données angulaires stockées et les envoie au Raspberry Pi, comme illustré ci-dessous :
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/GET_A.jpg)
 
 ## Conclusion
 
