@@ -13,7 +13,9 @@ Le protocole de communication entre le Raspberry et le STM32 est comme suit :
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/other/protocol.png)
 
 ## Serveur Web avec Flask
-在我们的测试中，Raspberry Pi 的ip地址是http://172.20.10.13，flask使用的端口是5000,所以我们的网页地址是http://172.20.10.13 
+
+Dans nos tests, l'adresse IP du Raspberry Pi est http://172.20.10.13 et le port utilisé par Flask est 5000. Ainsi, l'adresse de notre site web est http://172.20.10.13:5000/. Dans vos tests, vous devrez modifier l'adresse du site web en fonction de votre adresse IP et du port utilisé par Flask.
+
 ### Page d'accueil
 
 Lorsque vous saisissez http://172.20.10.13:5000/ dans votre navigateur, Flask renvoie le contenu de index.html, comme illustré ci-dessous :
@@ -60,7 +62,7 @@ En saisissant http://172.20.10.13:5000/pres/ \<index> dans RESTED, en choisissan
 
 ### Réglage de l'coefficient K
 
-En saisissant http://172.20.10.13:5000/scale/ &lt;new_scale&gt; dans RESTED, en choisissant POST, puis en cliquant sur send, Flask envoie une requête "SET_K" au STM32 pour définir la nouvelle donnée de coefficient K et la renvoie au format JSON, comme illustré ci-dessous. Ces données sont également stockées dans une liste Python.
+En saisissant http://172.20.10.13:5000/scale/&lt;new_scale&gt; dans RESTED, en choisissant POST, puis en cliquant sur send, Flask envoie une requête "SET_K" au STM32 pour définir la nouvelle donnée de coefficient K et la renvoie au format JSON, comme illustré ci-dessous. Ces données sont également stockées dans une liste Python.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/setScale.png)
 
 ### Récupération de l'coefficient K
