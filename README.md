@@ -14,6 +14,8 @@ Le protocole de communication entre le Raspberry et le STM32 est comme suit :
 
 ## Serveur Web avec Flask
 
+Dans nos tests, l'adresse IP du Raspberry Pi est http://172.20.10.13 et le port utilisé par Flask est 5000. Ainsi, l'adresse de notre site web est http://172.20.10.13:5000/. Dans vos tests, vous devrez modifier l'adresse du site web en fonction de votre adresse IP et du port utilisé par Flask.
+
 ### Page d'accueil
 
 Lorsque vous saisissez http://172.20.10.13:5000/ dans votre navigateur, Flask renvoie le contenu de index.html, comme illustré ci-dessous :
