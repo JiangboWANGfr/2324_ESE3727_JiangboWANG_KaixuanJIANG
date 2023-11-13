@@ -42,7 +42,7 @@ En saisissant http://172.20.10.13:5000/temp/ dans RESTED, en choisissant GET, pu
 
 ### Récupération de la température à l'indice x
 
-En saisissant http://172.20.10.13:5000/temp/<index> dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie la donnée de température à l'indice spécifié stockée dans la liste Python au format JSON, comme illustré ci-dessous.
+En saisissant http://172.20.10.13:5000/temp/\<index> dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie la donnée de température à l'indice spécifié stockée dans la liste Python au format JSON, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getTempIndex.png)
 
 ### Récupération des dernières données de pression
@@ -57,17 +57,17 @@ En saisissant http://172.20.10.13:5000/pres/ dans RESTED, en choisissant GET, pu
 
 ### Récupération de la pression à l'indice x
 
-En saisissant http://172.20.10.13:5000/pres/<index> dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie la donnée de pression à l'indice spécifié stockée dans la liste Python au format JSON, comme illustré ci-dessous.
+En saisissant http://172.20.10.13:5000/pres/\<index> dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie la donnée de pression à l'indice spécifié stockée dans la liste Python au format JSON, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getPresIndex.png)
 
-### Réglage de l'échelle
+### Réglage de l'coefficient K
 
-En saisissant http://172.20.10.13:5000/scale/ dans RESTED, en choisissant POST, puis en cliquant sur send, Flask envoie une requête "SET_T" au STM32 pour définir les nouvelles données d'échelle et renvoie les données au format JSON, comme illustré ci-dessous. Ces données sont également stockées dans une liste Python.
+En saisissant http://172.20.10.13:5000/scale/\<index> dans RESTED, en choisissant POST, puis en cliquant sur send, Flask envoie une requête "SET_K" au STM32 pour définir la nouvelle donnée de coefficient K et la renvoie au format JSON, comme illustré ci-dessous. Ces données sont également stockées dans une liste Python.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/setScale.png)
 
-### Récupération de l'échelle
+### Récupération de l'coefficient K
 
-En saisissant http://172.20.10.13:5000/scale/ dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie les données d'échelle stockées les plus récentes au format JSON, comme illustré ci-dessous.
+En saisissant http://172.20.10.13:5000/scale/ dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie la donnée de coefficient stockées les plus récentes au format JSON, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getScale.png)
 
 ### Récupération de l'angle
@@ -77,12 +77,12 @@ En saisissant http://172.20.10.13:5000/angle/ dans RESTED, en choisissant GET, p
 
 ### Suppression de la température à l'indice
 
-En saisissant http://172.20.10.13:5000/temp/<index> dans RESTED, en choisissant DELETE, puis en cliquant sur send, Flask supprime la donnée de température à l'indice spécifié dans la liste Python et renvoie l'indice supprimé, comme illustré ci-dessous.
-![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/deleteTempIndex.png)
+En saisissant http://172.20.10.13:5000/temp/\<index> dans RESTED, en choisissant DELETE, puis en cliquant sur send, Flask supprime la donnée de température à l'indice spécifié dans la liste Python et renvoie l'indice supprimé, comme illustré ci-dessous.
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/deleteTempindex.png)
 
 ### Suppression de la pression à l'indice
 
-En saisissant http://172.20.10.13:5000/pres/<index> dans RESTED, en choisissant DELETE, puis en cliquant sur send, Flask supprime la donnée de pression à l'indice spécifié dans la liste Python et renvoie l'indice supprimé, comme illustré ci-dessous.
+En saisissant http://172.20.10.13:5000/pres/\<index> dans RESTED, en choisissant DELETE, puis en cliquant sur send, Flask supprime la donnée de pression à l'indice spécifié dans la liste Python et renvoie l'indice supprimé, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/deletePresIndex.png)
 
 ## STM32 : Résultat du Protocole
