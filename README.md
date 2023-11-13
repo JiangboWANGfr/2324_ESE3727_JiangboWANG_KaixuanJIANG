@@ -4,7 +4,7 @@
 
 Dans ce TP, nous utiliserons un STM32 et un Raspberry Pi pour mettre en place un système de surveillance de la température et de la pression. Le STM32 recueillera les données de température et de pression, puis les enverra au Raspberry Pi via le protocole UART. Le Raspberry Pi utilisera le framework Flask pour mettre en place un serveur web, et finalement, nous utiliserons ce serveur pour visualiser les données.
 En même temps, nous utiliserons l'API REST pour effectuer des opérations CRUD (création, lecture, mise à jour, suppression) sur les données de température et de pression.
-Enfin, pour apprendre à utiliser le bus CAN, Nous enverrons le coefficient K du serveur web Raspberry Pi au STM32. Le STM32 multipliera ce coefficient par la dernière valeur de variation de température obtenue, puis convertira cette valeur en données angulaires. Ensuite, le STM32 enverra cet angle au moteur pas à pas via le bus CAN. Le moteur pas à pas tournera à cet angle, permettant ainsi de contrôler le mouvement du moteur pas à pas à l'aide des données de température. Voici le schéma du système :
+Enfin, pour apprendre à utiliser le bus CAN, nous enverrons des données d'échelle du serveur web du Raspberry Pi au STM32. Le STM32 convertira ces données en données angulaires, qu'il enverra ensuite à un moteur pas à pas via le bus CAN. Le moteur pas à pas tournera selon cet angle, permettant ainsi de contrôler le mouvement du moteur pas à pas avec les données de température. Voici le schéma du système :
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/other/TPobjuctive.png)
 
 ## Communication Protocol
@@ -13,9 +13,7 @@ Le protocole de communication entre le Raspberry et le STM32 est comme suit :
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/other/protocol.png)
 
 ## Serveur Web avec Flask
-
-Dans nos tests, l'adresse IP du Raspberry Pi est http://172.20.10.13 et le port utilisé par Flask est 5000. Ainsi, l'adresse de notre site web est http://172.20.10.13:5000/. Dans vos tests, vous devrez modifier l'adresse du site web en fonction de votre adresse IP et du port utilisé par Flask.
-
+在我们的测试中，Raspberry Pi 的ip地址是http://172.20.10.13，flask使用的端口是5000,所以我们的网页地址是http://172.20.10.13 
 ### Page d'accueil
 
 Lorsque vous saisissez http://172.20.10.13:5000/ dans votre navigateur, Flask renvoie le contenu de index.html, comme illustré ci-dessous :
@@ -109,7 +107,7 @@ Lorsque le STM32 reçoit une requête SET_K envoyée par le Raspberry Pi, il dé
 
 ### GET_K
 
-Lorsque le STM32 reçoit une requête GET_K envoyée par le Raspberry Pi, il récupère le dernier coefficient K et l'envoie au Raspberry Pi. La requête GET_K est illustrée ci-dessous :
+Lorsque le STM32 reçoit une requête GET_K envoyée par le Raspberry Pi, il récupère les dernières données angulaires et les envoie au Raspberry Pi. La requête GET_K est illustrée ci-dessous :
 
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/stm32Response/GET_K.jpg)
 
