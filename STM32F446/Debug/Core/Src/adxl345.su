@@ -1,0 +1,7 @@
+../Core/Src/adxl345.c:14:9:ADXL345_Init	32	static
+../Core/Src/adxl345.c:44:6:ADXL345_RD_Avval	32	static
+../Core/Src/adxl345.c:62:6:ADXL345_RD_XYZ	48	static
+../Core/Src/adxl345.c:79:6:ADXL345_AUTO_Adjust	56	static
+../Core/Src/adxl345.c:126:6:ADXL345_Read_Average	32	static
+../Core/Src/adxl345.c:155:7:ADXL345_Get_Angle	40	static
+../Core/Src/adxl345.c:179:6:ADXL345_Data_Show	24	static
