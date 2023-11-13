@@ -42,7 +42,7 @@ En saisissant http://172.20.10.13:5000/temp/ dans RESTED, en choisissant GET, pu
 
 ### Récupération de la température à l'indice x
 
-En saisissant http://172.20.10.13:5000/temp/ \ <index> dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie la donnée de température à l'indice spécifié stockée dans la liste Python au format JSON, comme illustré ci-dessous.
+En saisissant http://172.20.10.13:5000/temp/ \<index> dans RESTED, en choisissant GET, puis en cliquant sur send, Flask renvoie la donnée de température à l'indice spécifié stockée dans la liste Python au format JSON, comme illustré ci-dessous.
 ![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/pictureforReadme/webflask/getTempIndex.png)
 
 ### Récupération des dernières données de pression
