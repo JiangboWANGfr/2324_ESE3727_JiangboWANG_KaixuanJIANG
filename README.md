@@ -14,39 +14,32 @@
 
 ## Fonctionnalités et API
 ### web index 
-![Alt text](image-6.png)
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/Results/webflask/index.png)
 ### get a  temperature with post
 
-![Alt text](image.png)
+![image](https://github.com/JiangboWANGfr/2324_ESE3727_JiangboWANG_KaixuanJIANG/blob/main/Results/webflask/getNewTemp.png)
 
 ### get all pruois temp with get
-![Alt text](tempgete.png)
-
+![image](
 ### get temp index x 
-![Alt text](tempget.png)
+![image](
 ### get pressure with post
-![Alt text](image.png)
+![image](
 ### get pressure with get
-![Alt text](image.png)
+![image](
 ### get pressure with get x
-![Alt text](image.png)
+![image](
 ### set scale
-![Alt text](image-1.png)
-![Alt text](image.png)
+![image](
 ### get scale
-![Alt text](image-1.png)
-![Alt text](image-1.png)
-
+![image](
 ### get angle 
-![Alt text](image-4.png)
-
+![image](
 ### delete  temp inex 
-![Alt text](image-2.png)
-
+![image](
 ### delete  pres index 
-![Alt text](image-3.png)
-
+![image](
 ### show data 
 http://172.20.10.13:5000/showdata/
-![Alt text](image-5.png)
+![image](
 ## Conclusion
